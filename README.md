@@ -1,5 +1,5 @@
 # Haas-helper
-A skill which displays a person's picture to the Echo Show when their name is requested.
+Lambda function uses javascript and SQL to pull classmate details from postgres database and display the data on Amazon Echo Show.
 
 High level steps for this skill:
 1) I created a postgresSQL database instance on Amazon RDS to store student names, fun fact, and a link to their picture
