@@ -4,7 +4,7 @@
 
 'use strict';
 
-//const Alexa = require('alexa-sdk');  //dont use this when zipping the file to bring in pg, it seems to cause issues
+//const Alexa = require('alexa-sdk');  //dont use this when zipping the file to bring in pg
 
 var aws = require('aws-sdk');
 var pg = require("pg");
@@ -117,7 +117,7 @@ function pullPictureForName(intent, session, callback){
     repromptText = "The name you requested was " + firstname + " " + lastname + ". You can ask about someone else, or say quit.",
 	shouldEndSession = false,
 	detail, smallImageURL, largeImageURL;
-	//var queryResult = 'initialValue'; //create a var to store queryResult
+
 
 	// connect to our database 
 	var connectionString = "postgres://username:password@rds-postgresql-searchtest.clwx4hc000yh.us-east-1.rds.amazonaws.com:5432/paidSearchDB";
@@ -150,49 +150,11 @@ function pullPictureForName(intent, session, callback){
 
         });
     });
-    
-    // callback(sessionAttributes,
-    //     buildSpeechletResponse(CARD_TITLE, speechOutput, repromptText, shouldEndSession));
 }
 
 function showRandomHaasie(intent, session, callback) {
     
 }
-
-// function handleNameRandomGameRequest(intent, session, callback) {
-//     var sessionAttributes = {},
-    
-//     //Send the user's request type and slot input to dynamoDB for analytics
-//     currUserSlotInput = "No slot for this intent",  //Update this to the slot name for this handler function
-//     requestType = "Name Random Game Request",  //Update this to the Request Type of this handler function
-//     currUserID = session.user.userId, currSessionID = session.sessionId;
-    
-//     var index = games.length,  //all the games defined in json //6 in this case
-//         rand = Math.floor(Math.random() * index),
-//         chosenGame = games[rand],
-//         chosenGameName = Object.keys(chosenGame)[0],
-//         chosenGameDetails = chosenGame[chosenGameName],
-//         chosenGameCategory = chosenGameDetails[0]["Category"],  //this becomes whatever is in position 0 in that category array
-//         chosenGameMinPlayers = chosenGameDetails[0]["Min Players"],
-//         chosenGameReminder = chosenGameDetails[0]["Reminder"],
-//         chosenGameDefinition = chosenGameDetails[0]["Definition"],
-        
-//         speechOutput = 
-//             "My random game is " + chosenGameName + ". "
-//          + "The games category is " + chosenGameCategory + ". "
-//          + "The game can be played with " + chosenGameMinPlayers + "players. "
-//          + "Your quick refresher is: " + chosenGameReminder + ". "
-//          + definitionAdded
-//             ,
-//         detail = "Rules for " + chosenGameName + ":  " + chosenGameDefinition, //"This is an additional detailed definition for your game.",
-//         repromptText = "Try saying: choose a drinking game",
-//         shouldEndSession = true;
-   
-//     sendRequestToAnalyticsDB(currUserSlotInput, currUserID, currSessionID, speechOutput, requestType);    
-//     callback(sessionAttributes,
-//         buildSpeechletResponseWithDetail(CARD_TITLE, detail, speechOutput, repromptText, shouldEndSession));
-//         //buildSpeechletResponse(CARD_TITLE, speechOutput, repromptText, shouldEndSession));
-// }
 
 //------------logic for required/default Amazon functions-----------
 function onSessionEnded(sessionEndedRequest, session) {
@@ -235,8 +197,6 @@ function handleRepeatRequest(intent, session, callback) {
 }
 
 function handleGetHelpRequest(intent, session, callback) {
-    // Provide a help prompt for the user, explaining how the game is played. Then, continue the game
-    // if there is one in progress, or provide the option to start another one.
     
     // Ensure that session.attributes has been initialized
     if (!session.attributes) {
